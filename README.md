@@ -17,4 +17,4 @@ Use this library: https://github.com/jbogard/MediatR
 
 Extra Task: Reading of a user should be cached (1 Minute). The API should return the information if a result comes from the cache or not. Adding the query parameter useCache=false to the query will disable the cache.
 This functionality should be used for all data APIs that return data from a database. How do you make it available for every developer? What could be a good approach / standardizing?
-.
+. s
