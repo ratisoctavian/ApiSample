@@ -12,10 +12,12 @@
     "ApiSample.Api": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:58891;http://localhost:58892"
+      "applicationUrl": "https://localhost:58891;http://localhost:58892",
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
