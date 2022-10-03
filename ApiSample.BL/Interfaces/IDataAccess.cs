@@ -11,12 +11,12 @@ namespace ApiSample.BL.Interfaces
     {
         List<User> GetUsers();
 
-        long CreateUser(User user);
+        User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper);
 
-        long UpdateUser(User user);
+        User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userType);
 
-        bool DeleteUser(long id);
+        User? DeleteUser(string loginName);
 
-        User ReadUser(User user);
+        User? ReadUser(string loginName);
     }
 }

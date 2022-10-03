@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace ApiSample.BL.Commands
 {
-    internal class UpdateUserCommand
-    {
-    }
+    public record UpdateUserCommand(string firstName, string lastName, string loginName, string email, string phoneNumber, string userType);
 }

@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IDataAccess, MockDataAccess>();
+builder.Services.AddSingleton<IDataAccess, MockDataAccess>();
 builder.Services.AddMediatR(typeof(ApiSample.BL.Handlers.GetUserListHandler).GetTypeInfo().Assembly);
 
 var app = builder.Build();  

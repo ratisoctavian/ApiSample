@@ -21,23 +21,25 @@ namespace ApiSample.Access
 
         }
 
-        public long CreateUser(User user)
+        public User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper)
         {
+            var user = new User() { Email = email, FirstName = firstName, LastName = lastName, LoginName = loginName, PhoneNumber = phoneNumber };
+            user.Id = Users.Max(u => u.Id) + 1;
             Users.Add(user);
-            return user.Id;
+            return user;
         }
 
-        public bool DeleteUser(long id)
+        public User? DeleteUser(string loginName)
         {
-            var userToDelete = Users.FirstOrDefault(u => u.Id == id);
+            var userToDelete = Users.FirstOrDefault(u => u.LoginName == loginName);
             if (userToDelete is null)
             {
-                return false;
+                return null;
             }
             else
             {
                 Users.Remove(userToDelete);
-                return true;
+                return userToDelete;
             }
         }
 
@@ -46,17 +48,26 @@ namespace ApiSample.Access
             return Users;
         }
 
-        public User? ReadUser(User user)
+        public User? ReadUser(string loginName)
         {
-            return Users.FirstOrDefault(u => u.Id == user.Id);
+            return Users.FirstOrDefault(u => u.LoginName == loginName);
         }
 
-        public long UpdateUser(User user)
+        public User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper)
         {
 
-            var userToUpdate = Users.FirstOrDefault(u => u.Id == user.Id);
-            userToUpdate = user;
-            return user.Id;
+            var userToUpdate = Users.FirstOrDefault(u => u.LoginName == loginName);
+            if (userToUpdate is not null)
+            {
+                userToUpdate.UserTypes = userTyper;
+                userToUpdate.Email = email;
+                userToUpdate.PhoneNumber = phoneNumber;
+                userToUpdate.FirstName = firstName;
+                userToUpdate.LastName = lastName;
+                userToUpdate.LoginName = loginName;
+            }
+
+            return userToUpdate;
         }
     }
 }

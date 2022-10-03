@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace ApiSample.BL.Commands
 {
-    internal class DeleteUserCommand
-    {
-    }
+    public record DeleteUserCommand(string loginName);
 }
