@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSample.BL.Queries
+namespace ApiSample.BL.Queries.Users
 {
-    public record GetUserListQuery(): IRequest<List<User>>;
+    public record GetUserListQuery() : IRequest<List<User>>;
 
 }

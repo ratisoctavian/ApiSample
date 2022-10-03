@@ -1,4 +1,5 @@
 using ApiSample.Access;
+using ApiSample.BL.Handlers.Users;
 using ApiSample.BL.Interfaces;
 using MediatR;
 using System.Reflection;
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IDataAccess, MockDataAccess>();
-builder.Services.AddMediatR(typeof(ApiSample.BL.Handlers.GetUserListHandler).GetTypeInfo().Assembly);
+builder.Services.AddMediatR(typeof(GetUserListHandler).GetTypeInfo().Assembly);
 
 var app = builder.Build();  
 

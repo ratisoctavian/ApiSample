@@ -1,4 +1,4 @@
-﻿using ApiSample.BL.Commands;
+﻿using ApiSample.BL.Commands.Users;
 using ApiSample.BL.Interfaces;
 using ApiSample.Models.DataModel;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSample.BL.Handlers
+namespace ApiSample.BL.Handlers.Users
 {
     public class UpdateUserHandler
     {
@@ -15,7 +15,7 @@ namespace ApiSample.BL.Handlers
 
         public UpdateUserHandler(IDataAccess dataAccess)
         {
-            this._dataAccess = dataAccess;
+            _dataAccess = dataAccess;
         }
         public Task<User?> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {

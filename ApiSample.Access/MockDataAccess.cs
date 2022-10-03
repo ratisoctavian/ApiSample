@@ -69,5 +69,10 @@ namespace ApiSample.Access
 
             return userToUpdate;
         }
+
+        public User? GetUserByLoginName(string loginName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

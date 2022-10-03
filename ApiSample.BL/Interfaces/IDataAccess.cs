@@ -18,5 +18,7 @@ namespace ApiSample.BL.Interfaces
         User? DeleteUser(string loginName);
 
         User? ReadUser(string loginName);
+
+        User? GetUserByLoginName(string loginName);
     }
 }

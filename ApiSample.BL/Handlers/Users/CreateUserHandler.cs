@@ -1,4 +1,4 @@
-﻿using ApiSample.BL.Commands;
+﻿using ApiSample.BL.Commands.Users;
 using ApiSample.BL.Interfaces;
 using ApiSample.BL.Queries;
 using ApiSample.Models.DataModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiSample.BL.Handlers
+namespace ApiSample.BL.Handlers.Users
 {
     public class CreateUserHandler : IRequestHandler<CreateUserCommand, User>
     {
@@ -17,7 +17,7 @@ namespace ApiSample.BL.Handlers
 
         public CreateUserHandler(IDataAccess dataAccess)
         {
-            this._dataAccess = dataAccess;
+            _dataAccess = dataAccess;
         }
         public Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
