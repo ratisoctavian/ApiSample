@@ -26,6 +26,19 @@ namespace ApiSample.Models.DataModel
 
         public string PhoneNumber { get; set; }
 
-        public UserTypes UserType {  get; set; }
+        public string UserTypeString {
+            get { return this.UserType.ToString(); }
+            set {
+            if (Enum.IsDefined(typeof(UserTypes), value))
+                {
+                    Enum.TryParse(value, out UserTypes type);
+                    UserType = type;
+                }
+            else
+                {
+                    UserType = UserTypes.Guest; 
+                }
+                    } }
+        private UserTypes UserType {  get; set; }
     }
 }

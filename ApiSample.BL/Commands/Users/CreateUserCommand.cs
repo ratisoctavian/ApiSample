@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace ApiSample.BL.Commands.Users
 {
-    public record CreateUserCommand(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userType) : IRequest<User>;
+    public record CreateUserCommand(string firstName, string lastName, string loginName, string email, string phoneNumber, string userType) : IRequest<User>;
 }

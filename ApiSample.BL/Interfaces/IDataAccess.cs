@@ -12,9 +12,9 @@ namespace ApiSample.BL.Interfaces
     {
         List<User> GetUsers();
 
-        User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userTyper);
+        User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper);
 
-        User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userType);
+        User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userType);
 
         User? DeleteUser(string loginName);
 

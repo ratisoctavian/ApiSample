@@ -22,9 +22,9 @@ namespace ApiSample.Access
             Users.Add(new User {Email = "tavi@tavi.com", FirstName = "Tavi", LastName = "Ratis", LoginName = "Tavi", PhoneNumber = "4321" });
         }
 
-        public User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userTyper)
+        public User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userType)
         {
-            var user = new User() { Email = email, FirstName = firstName, LastName = lastName, LoginName = loginName, PhoneNumber = phoneNumber };
+            var user = new User() { Email = email, FirstName = firstName, LastName = lastName, LoginName = loginName, PhoneNumber = phoneNumber, UserTypeString = userType };
             if (Users.Any(u => u.LoginName.ToLower() == loginName.ToLower()))
             {
                 throw new Exception("LoginName already exists");
@@ -57,13 +57,13 @@ namespace ApiSample.Access
             return Users.FirstOrDefault(u => u.LoginName.ToLower() == loginName.ToLower());
         }
 
-        public User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userType)
+        public User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userType)
         {
 
             var userToUpdate = Users.FirstOrDefault(u => u.LoginName.ToLower() == loginName.ToLower());
             if (userToUpdate is not null)
             {
-                userToUpdate.UserType = userType;
+                userToUpdate.UserTypeString = userType;
                 userToUpdate.Email = email;
                 userToUpdate.PhoneNumber = phoneNumber;
                 userToUpdate.FirstName = firstName;

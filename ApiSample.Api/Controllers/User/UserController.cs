@@ -29,6 +29,7 @@ namespace ApiSample.Api.Controllers.Users
         [MapToApiVersion("1.0")]
         public async Task<IActionResult> GetAllUsers()
         {
+            _logger.LogInformation("asda");
             var query = new GetUserListQuery();
             var result = await _mediator.Send(query);
             return Ok(result);
@@ -73,7 +74,7 @@ namespace ApiSample.Api.Controllers.Users
         [ApiExplorerSettings(GroupName = "1.0")]
         public async Task<IActionResult> CreateUser([FromBody] User user)
         {
-            var command = new CreateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserType);
+            var command = new CreateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserTypeString);
 
             var result = await _mediator.Send(command);
 
@@ -86,7 +87,7 @@ namespace ApiSample.Api.Controllers.Users
 
         public async Task<IActionResult> UpdateUser([FromBody] User user)
         {
-            var command = new UpdateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserType);
+            var command = new UpdateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserTypeString);
 
             var result = await _mediator.Send(command);
 
