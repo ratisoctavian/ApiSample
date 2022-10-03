@@ -17,13 +17,16 @@ namespace ApiSample.Access
         {
             Users = new List<User>();
             Users.Add(new User {Id=1, Email = "astig@astig.com", FirstName = "Astig", LastName = "Basca", LoginName = "Astig", PhoneNumber = "1234" });
-            Users.Add(new User {Id=2, Email = "tavi@tavi.com", FirstName = "Tavo", LastName = "Ratis", LoginName = "Tavi", PhoneNumber = "4321" });
+            Users.Add(new User {Id=2, Email = "tavi@tavi.com", FirstName = "Tavi", LastName = "Ratis", LoginName = "Tavi", PhoneNumber = "4321" });
 
         }
 
         public User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper)
         {
             var user = new User() { Email = email, FirstName = firstName, LastName = lastName, LoginName = loginName, PhoneNumber = phoneNumber };
+            if (Users.Any(u => u.LoginName.ToLower() == loginName.ToLower()))
+            {
+            }
             user.Id = Users.Max(u => u.Id) + 1;
             Users.Add(user);
             return user;
@@ -72,7 +75,7 @@ namespace ApiSample.Access
 
         public User? GetUserByLoginName(string loginName)
         {
-            return Users.FirstOrDefault(u => u.LoginName==loginName);
+            return Users.FirstOrDefault(u => u.LoginName.ToLower()==loginName.ToLower());
         }
     }
 }

@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace ApiSample.BL.Queries.Users
 {
-    public record GetUserByLoginName(string loginName) : IRequest<ApiSample.Models.DataModel.User>;
+    public record GetUserByLoginNameQuery(string loginName) : IRequest<User>;
 }
