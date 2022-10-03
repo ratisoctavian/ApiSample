@@ -1,5 +1,7 @@
 ﻿using ApiSample.BL.Interfaces;
 using ApiSample.Models.DataModel;
+using ApiSample.Models.Enums;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,25 +18,24 @@ namespace ApiSample.Access
         public MockDataAccess()
         {
             Users = new List<User>();
-            Users.Add(new User {Id=1, Email = "astig@astig.com", FirstName = "Astig", LastName = "Basca", LoginName = "Astig", PhoneNumber = "1234" });
-            Users.Add(new User {Id=2, Email = "tavi@tavi.com", FirstName = "Tavi", LastName = "Ratis", LoginName = "Tavi", PhoneNumber = "4321" });
-
+            Users.Add(new User {Email = "astig@astig.com", FirstName = "Astig", LastName = "Basca", LoginName = "Astig", PhoneNumber = "1234" });
+            Users.Add(new User {Email = "tavi@tavi.com", FirstName = "Tavi", LastName = "Ratis", LoginName = "Tavi", PhoneNumber = "4321" });
         }
 
-        public User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper)
+        public User CreateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userTyper)
         {
             var user = new User() { Email = email, FirstName = firstName, LastName = lastName, LoginName = loginName, PhoneNumber = phoneNumber };
             if (Users.Any(u => u.LoginName.ToLower() == loginName.ToLower()))
             {
+                throw new Exception("LoginName already exists");
             }
-            user.Id = Users.Max(u => u.Id) + 1;
             Users.Add(user);
             return user;
         }
 
         public User? DeleteUser(string loginName)
         {
-            var userToDelete = Users.FirstOrDefault(u => u.LoginName == loginName);
+            var userToDelete = Users.FirstOrDefault(u => u.LoginName.ToLower() == loginName.ToLower());
             if (userToDelete is null)
             {
                 return null;
@@ -53,16 +54,16 @@ namespace ApiSample.Access
 
         public User? ReadUser(string loginName)
         {
-            return Users.FirstOrDefault(u => u.LoginName == loginName);
+            return Users.FirstOrDefault(u => u.LoginName.ToLower() == loginName.ToLower());
         }
 
-        public User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, string userTyper)
+        public User? UpdateUser(string firstName, string lastName, string loginName, string email, string phoneNumber, UserTypes userType)
         {
 
-            var userToUpdate = Users.FirstOrDefault(u => u.LoginName == loginName);
+            var userToUpdate = Users.FirstOrDefault(u => u.LoginName.ToLower() == loginName.ToLower());
             if (userToUpdate is not null)
             {
-                userToUpdate.UserTypes = userTyper;
+                userToUpdate.UserType = userType;
                 userToUpdate.Email = email;
                 userToUpdate.PhoneNumber = phoneNumber;
                 userToUpdate.FirstName = firstName;

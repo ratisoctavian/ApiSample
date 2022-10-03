@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiSample.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,8 +10,11 @@ namespace ApiSample.Models.DataModel
 {
     public class User
     {
-
-        public long Id {  get; set; }
+        public User()
+        {
+            Id = Guid.NewGuid();
+        }
+        public Guid Id { get; private set; }
         
         public string FirstName { get; set; }    
         
@@ -22,6 +26,6 @@ namespace ApiSample.Models.DataModel
 
         public string PhoneNumber { get; set; }
 
-        public string UserTypes {  get; set; }
+        public UserTypes UserType {  get; set; }
     }
 }

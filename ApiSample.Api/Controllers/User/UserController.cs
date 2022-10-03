@@ -14,11 +14,12 @@ namespace ApiSample.Api.Controllers.Users
     [ApiVersion("2.0")]
     public class UserController : ControllerBase
     {
-
+        private readonly ILogger _logger;
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediator)
+        public UserController(IMediator mediator, ILogger<UserController> logger)
         {
+             _logger= logger;
             _mediator = mediator;
         }
 
@@ -72,7 +73,7 @@ namespace ApiSample.Api.Controllers.Users
         [ApiExplorerSettings(GroupName = "1.0")]
         public async Task<IActionResult> CreateUser([FromBody] User user)
         {
-            var command = new CreateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserTypes);
+            var command = new CreateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserType);
 
             var result = await _mediator.Send(command);
 
@@ -85,7 +86,7 @@ namespace ApiSample.Api.Controllers.Users
 
         public async Task<IActionResult> UpdateUser([FromBody] User user)
         {
-            var command = new UpdateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserTypes);
+            var command = new UpdateUserCommand(user.FirstName, user.LastName, user.LoginName, user.Email, user.PhoneNumber, user.UserType);
 
             var result = await _mediator.Send(command);
 
@@ -94,6 +95,8 @@ namespace ApiSample.Api.Controllers.Users
 
         [HttpDelete]
         [Route("Delete")]
+        [ApiExplorerSettings(GroupName = "1.0")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> DeleteUser([FromBody] string loginName)
         {
             var command = new DeleteUserCommand(loginName);

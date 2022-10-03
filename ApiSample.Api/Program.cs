@@ -1,15 +1,17 @@
 using ApiSample.Access;
+using ApiSample.Api.ErrorHandling.Extensions;
 using ApiSample.BL.Handlers.Users;
 using ApiSample.BL.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddLogging();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -49,7 +51,8 @@ builder.Services.AddVersionedApiExplorer(
 
 
 var app = builder.Build();
-
+var logger = app.Logger;
+app.ConfigureExceptionHandler(logger);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -60,6 +63,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint($"/swagger/2.0/swagger.json", "v2");
     });
 }
+
+app.ConfigureExceptionHandler(logger);
 
 app.UseHttpsRedirection();
 
