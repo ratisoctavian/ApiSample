@@ -18,7 +18,7 @@ namespace ApiSample.BL.Handlers.Users
             _dataAccess = dataAccess;
         }
 
-        public Task<User> Handle(GetUserByLoginName request, CancellationToken cancellationToken)
+        public Task<User?> Handle(GetUserByLoginName request, CancellationToken cancellationToken)
         {
             return Task.FromResult(_dataAccess.GetUserByLoginName(request.loginName));
         }

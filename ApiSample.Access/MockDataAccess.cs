@@ -72,7 +72,7 @@ namespace ApiSample.Access
 
         public User? GetUserByLoginName(string loginName)
         {
-            throw new NotImplementedException();
+            return Users.FirstOrDefault(u => u.LoginName==loginName);
         }
     }
 }

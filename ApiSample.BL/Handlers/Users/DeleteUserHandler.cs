@@ -19,7 +19,6 @@ namespace ApiSample.BL.Handlers.Users
         }
         public Task<User?> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new User();
             return Task.FromResult(_dataAccess.DeleteUser(request.loginName));
         }
     }
